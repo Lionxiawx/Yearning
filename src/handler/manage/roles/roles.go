@@ -2,6 +2,7 @@ package roles
 
 import (
 	"Yearning-go/src/handler/commom"
+	"Yearning-go/src/lib"
 	"Yearning-go/src/model"
 	ser "Yearning-go/src/parser"
 	pb "Yearning-go/src/proto"
@@ -13,7 +14,7 @@ import (
 func SuperSaveRoles(c yee.Context) (err error) {
 
 	u := new(ser.AuditRole)
-	
+
 	if err = c.Bind(u); err != nil {
 		c.Logger().Error(err.Error())
 		return c.JSON(http.StatusOK, commom.ERR_REQ_BIND)

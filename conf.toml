@@ -1,0 +1,11 @@
+[Mysql]
+Db = "yearning"
+Host = "192.168.6.40"
+Port = "6612"
+Password = "root123"
+User = "root"
+
+[General]
+SecretKey = "dbcjqheupqjsuwsm"
+GrpcAddr = "127.0.0.1:50001"
+
