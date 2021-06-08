@@ -33,6 +33,13 @@ type general struct {
 	GrpcAddr  string
 }
 
+type dingMsg struct {
+	DingMsgUrl       string
+	DingMsgWebUrl    string
+	DingMsgAppSecret string
+	DingMsgAppCode   string
+}
+
 type DbInfo struct {
 	Host     string
 	User     string
@@ -44,6 +51,7 @@ type DbInfo struct {
 type Config struct {
 	General general
 	Mysql   mysql
+	DingMsg dingMsg
 }
 
 var C Config
@@ -63,3 +71,11 @@ var GloLdap Ldap
 var GloOther Other
 
 var GloMessage Message
+
+var DingMsgUrl = ""
+
+var DingMsgAppSecret = ""
+
+var DingMsgWebUrl = ""
+
+var DingMsgAppCode = ""

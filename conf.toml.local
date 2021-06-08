@@ -10,8 +10,7 @@ SecretKey = "dbcjqheupqjsuwsm"
 GrpcAddr = "192.168.7.14:50001"
 
 [DingMsg]
-DingMsgUrl = "http://dingmsg.test027.com/dingmsg"
-#DingMsgUrl = "http://127.0.0.1:9001/dingmsg"
+DingMsgUrl = "http://127.0.0.1:9001/dingmsg"
 
 DingMsgAppSecret = "e2eb553adbb94932ad7b6cbadf6b911e"
 DingMsgWebUrl = "http://dingmsg.test027.com"

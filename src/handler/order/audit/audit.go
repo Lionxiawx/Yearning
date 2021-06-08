@@ -1,6 +1,7 @@
 package audit
 
 import (
+	"Yearning-go/src/dingmsg"
 	"Yearning-go/src/handler/commom"
 	"Yearning-go/src/lib"
 	"Yearning-go/src/model"
@@ -22,7 +23,7 @@ func SuperSQLTest(c yee.Context) (err error) {
 	model.DB().Where("source =?", order.Source).First(&s)
 	y := pb.LibraAuditOrder{
 		IsDML:    order.Type == 1,
-		SQL:     order.SQL,
+		SQL:      order.SQL,
 		DataBase: order.DataBase,
 		Source: &pb.Source{
 			Addr:     s.IP,
@@ -55,7 +56,6 @@ func ExecuteOrder(c yee.Context) (err error) {
 		c.Logger().Error(IDEMPOTENT)
 		return c.JSON(http.StatusOK, commom.SuccessPayLoadToMessage(IDEMPOTENT))
 	}
-
 	if order.Type == 3 {
 		model.DB().Model(&model.CoreSqlOrder{}).Where("work_id =?", u.WorkId).Updates(map[string]interface{}{"status": 1, "execute_time": time.Now().Format("2006-01-02 15:04"), "current_step": order.CurrentStep + 1})
 		lib.MessagePush(u.WorkId, 1, "")
@@ -65,6 +65,9 @@ func ExecuteOrder(c yee.Context) (err error) {
 		order.Assigned = user
 
 		executor.Init(order).Executor()
+
+		dingtalk.SendExecMsg(order)
+
 	}
 	model.DB().Create(&model.CoreWorkflowDetail{
 		WorkId:   u.WorkId,

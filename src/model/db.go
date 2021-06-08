@@ -80,6 +80,12 @@ func DbInit(c string) {
 	}
 	Grpc = C.General.GrpcAddr
 	JWT = C.General.SecretKey
+	//钉钉消息服务相关
+	DingMsgUrl = C.DingMsg.DingMsgUrl
+	DingMsgWebUrl = C.DingMsg.DingMsgWebUrl
+	DingMsgAppSecret = C.DingMsg.DingMsgAppSecret
+	DingMsgAppCode = C.DingMsg.DingMsgAppCode
+
 	newDb, err := gorm.Open("mysql", fmt.Sprintf("%s:%s@(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", C.Mysql.User, C.Mysql.Password, C.Mysql.Host, C.Mysql.Port, C.Mysql.Db))
 	if err != nil {
 		newDb, err = gorm.Open("mysql", fmt.Sprintf("%s:%s@(%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", os.Getenv("MYSQL_USER"), os.Getenv("MYSQL_PASSWORD"), os.Getenv("MYSQL_ADDR"), os.Getenv("MYSQL_DB")))

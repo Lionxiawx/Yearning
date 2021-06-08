@@ -14,6 +14,7 @@
 package personal
 
 import (
+	"Yearning-go/src/dingmsg"
 	"Yearning-go/src/handler/commom"
 	"Yearning-go/src/lib"
 	"Yearning-go/src/model"
@@ -55,6 +56,7 @@ func SQLReferToOrder(c yee.Context) (err error) {
 	})
 
 	lib.MessagePush(w, 2, "")
+	dingtalk.SendApprovalMsg(*u)
 
 	CallAutoTask(u, w, c)
 
