@@ -92,6 +92,9 @@ type CoreSqlOrder struct {
 	IDC         string `gorm:"type:varchar(50);not null" json:"idc"`
 	Source      string `gorm:"type:varchar(50);not null" json:"source"`
 	DataBase    string `gorm:"type:varchar(50);not null" json:"data_base"`
+	IsPub       uint   `gorm:"type:tinyint(2);not null " json:"is_pub"`
+	IsDel       uint   `gorm:"type:tinyint(2);not null " json:"is_del"`
+	BugType     int    `gorm:"type:int(50);not null " json:"bug_type"`
 	Table       string `gorm:"type:varchar(50);not null" json:"table"`
 	Date        string `gorm:"type:varchar(50);not null" json:"date"`
 	SQL         string `gorm:"type:longtext;not null" json:"sql"`
