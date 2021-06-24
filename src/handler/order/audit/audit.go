@@ -129,6 +129,9 @@ func FetchAuditOrder(c yee.Context) (err error) {
 			Scopes(
 				commom.AccordingToRelevant(user),
 				commom.AccordingToText(u.Find.Text),
+				commom.AccordingToIsPub(u.Find.IsPub),
+				commom.AccordingToIsDel(u.Find.IsDel),
+				commom.AccordingToBugType(u.Find.BugType),
 				commom.AccordingToDatetime(u.Find.Picker),
 			).Count(&pg).Order("id desc").Offset(start).Limit(end).Find(&order)
 	} else {
@@ -155,6 +158,9 @@ func FetchRecord(c yee.Context) (err error) {
 				commom.AccordingToOrderState(),
 				commom.AccordingToWorkId(u.Find.Text),
 				commom.AccordingToDatetime(u.Find.Picker),
+				commom.AccordingToIsPub(u.Find.IsPub),
+				commom.AccordingToIsDel(u.Find.IsDel),
+				commom.AccordingToBugType(u.Find.BugType),
 			).Count(&pg).Order("id desc").Offset(start).Limit(end).Find(&order)
 	} else {
 		model.DB().Model(&model.CoreSqlOrder{}).Select(commom.QueryField).Scopes(

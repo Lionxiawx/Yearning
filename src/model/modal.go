@@ -147,6 +147,9 @@ type CoreQueryOrder struct {
 	Username string `gorm:"type:varchar(50);not null" json:"username"`
 	Date     string `gorm:"type:varchar(50);not null;index:query_idx" json:"date"`
 	Text     string `gorm:"type:longtext;not null" json:"text"`
+	IsPub    uint   `gorm:"type:tinyint(2);not null " json:"is_pub"`
+	IsDel    uint   `gorm:"type:tinyint(2);not null " json:"is_del"`
+	BugType  int    `gorm:"type:int(50);not null " json:"bug_type"`
 	IDC      string `gorm:"type:varchar(50);not null" json:"idc"`
 	Assigned string `gorm:"type:varchar(50);not null" json:"assigned"`
 	Realname string `gorm:"type:varchar(50);not null" json:"real_name"`

@@ -24,16 +24,18 @@ func PersonalFetchMyOrder(c yee.Context) (err error) {
 	if u.Find.Valve {
 		model.DB().Model(&model.CoreSqlOrder{}).Select(commom.QueryField).
 			Scopes(
-			commom.AccordingToUsernameEqual(user),
-			commom.AccordingToDatetime(u.Find.Picker),
+				commom.AccordingToUsernameEqual(user),
+				commom.AccordingToDatetime(u.Find.Picker),
 				commom.AccordingToText(u.Find.Text),
+				commom.AccordingToIsPub(u.Find.IsPub),
+				commom.AccordingToIsDel(u.Find.IsDel),
+				commom.AccordingToBugType(u.Find.BugType),
 			).Order("id desc").Count(&pg).Offset(start).Limit(end).Find(&order)
 	} else {
 		model.DB().Model(&model.CoreSqlOrder{}).Select(commom.QueryField).Scopes(commom.AccordingToUsernameEqual(user)).Count(&pg).Order("id desc").Offset(start).Limit(end).Find(&order)
 	}
-	return c.JSON(http.StatusOK, commom.SuccessPayload(commom.CommonList{Data: order,Page: pg,Multi: model.GloOther.Multi}))
+	return c.JSON(http.StatusOK, commom.SuccessPayload(commom.CommonList{Data: order, Page: pg, Multi: model.GloOther.Multi}))
 }
-
 
 func PersonalUserEdit(c yee.Context) (err error) {
 	param := c.QueryParam("tp")
@@ -62,6 +64,6 @@ func PersonalFetchOrderListOrProfile(c yee.Context) (err error) {
 	case "edit":
 		return PersonalUserEdit(c)
 	default:
-		return c.JSON(http.StatusOK,commom.ERR_REQ_FAKE)
+		return c.JSON(http.StatusOK, commom.ERR_REQ_FAKE)
 	}
 }

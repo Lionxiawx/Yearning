@@ -5,12 +5,12 @@ import (
 	"reflect"
 )
 
-const QueryField = "work_id, username, text, backup, date, real_name, executor, `status`, `type`, `delay`, `source`,`id_c`,`data_base`,`table`,`execute_time`,assigned,current_step,relevant"
+const QueryField = "work_id, username, text, backup, date, real_name, executor, `status`, `type`, `delay`, `source`,`id_c`,`data_base`,`is_pub`,`is_del`,`bug_type`,`table`,`execute_time`,assigned,current_step,relevant"
 
 func AccordingToWorkId(workId string) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
 		if workId == "" {
-			 return db
+			return db
 		}
 		return db.Where("work_id like ?", "%"+workId+"%")
 	}
@@ -45,7 +45,7 @@ func AccordingToUsername(user string) func(db *gorm.DB) *gorm.DB {
 
 func AccordingToDatetime(time []string) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
-		if reflect.DeepEqual(time, []string{"", ""}) || len(time)  != 2 {
+		if reflect.DeepEqual(time, []string{"", ""}) || len(time) != 2 {
 			return db
 		}
 		return db.Where("time >= ? AND time <= ?", time[0], time[1])
@@ -54,7 +54,7 @@ func AccordingToDatetime(time []string) func(db *gorm.DB) *gorm.DB {
 
 func AccordingToDate(time []string) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
-		if reflect.DeepEqual(time, []string{"", ""}) || len(time)  != 2 {
+		if reflect.DeepEqual(time, []string{"", ""}) || len(time) != 2 {
 			return db
 		}
 		return db.Where("date >= ? AND date <= ?", time[0], time[1])
@@ -86,6 +86,24 @@ func AccordingToText(text string) func(db *gorm.DB) *gorm.DB {
 			return db
 		}
 		return db.Where("text like ?", "%"+text+"%")
+	}
+}
+func AccordingToIsPub(isPub int) func(db *gorm.DB) *gorm.DB {
+	return func(db *gorm.DB) *gorm.DB {
+
+		return db.Where("is_pub = ?", isPub)
+	}
+}
+func AccordingToIsDel(isDel int) func(db *gorm.DB) *gorm.DB {
+	return func(db *gorm.DB) *gorm.DB {
+
+		return db.Where("is_del = ?", isDel)
+	}
+}
+func AccordingToBugType(bugType int) func(db *gorm.DB) *gorm.DB {
+	return func(db *gorm.DB) *gorm.DB {
+
+		return db.Where("bug_type = ?", bugType)
 	}
 }
 
@@ -131,9 +149,9 @@ func AccordingToRuleSuperOrAdmin() func(db *gorm.DB) *gorm.DB {
 	}
 }
 
-func AccordingToGroupSourceIsQuery(start,end int) func(db *gorm.DB) *gorm.DB {
+func AccordingToGroupSourceIsQuery(start, end int) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
-		return db.Where("is_query =? or is_query = ?", start,end)
+		return db.Where("is_query =? or is_query = ?", start, end)
 	}
 }
 

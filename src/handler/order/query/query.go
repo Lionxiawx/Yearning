@@ -27,6 +27,9 @@ func FetchQueryRecord(c yee.Context) (err error) {
 			commom.AccordingToQueryPer(),
 			commom.AccordingToWorkId(u.Find.Text),
 			commom.AccordingToDate(u.Find.Picker),
+			commom.AccordingToIsPub(u.Find.IsPub),
+			commom.AccordingToIsDel(u.Find.IsDel),
+			commom.AccordingToBugType(u.Find.BugType),
 		).Order("id desc").Count(&pg).Offset(start).Limit(end).Find(&order)
 	} else {
 		model.DB().Model(model.CoreQueryOrder{}).Scopes(
@@ -68,11 +71,17 @@ func FetchQueryOrder(c yee.Context) (err error) {
 		if u.Find.Picker[0] == "" {
 			model.DB().Model(model.CoreQueryOrder{}).Scopes(
 				commom.AccordingToUsername(u.Find.Text),
+				commom.AccordingToIsPub(u.Find.IsPub),
+				commom.AccordingToIsDel(u.Find.IsDel),
+				commom.AccordingToBugType(u.Find.BugType),
 				commom.AccordingToAssigned(user),
 			).Order("id desc").Count(&pg).Offset(start).Limit(end).Find(&order)
 		} else {
 			model.DB().Model(model.CoreQueryOrder{}).Scopes(
 				commom.AccordingToUsername(u.Find.Text),
+				commom.AccordingToIsPub(u.Find.IsPub),
+				commom.AccordingToIsDel(u.Find.IsDel),
+				commom.AccordingToBugType(u.Find.BugType),
 				commom.AccordingToAssigned(user),
 				commom.AccordingToDate(u.Find.Picker),
 			).Order("id desc").Count(&pg).Offset(start).Limit(end).Find(&order)

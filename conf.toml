@@ -7,7 +7,7 @@ User = "root"
 
 [General]
 SecretKey = "dbcjqheupqjsuwsm"
-GrpcAddr = "192.168.7.14:50001"
+GrpcAddr = "192.168.7.3:50001"
 
 [DingMsg]
 DingMsgUrl = "http://dingmsg.test027.com/dingmsg"
