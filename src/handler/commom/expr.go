@@ -88,21 +88,27 @@ func AccordingToText(text string) func(db *gorm.DB) *gorm.DB {
 		return db.Where("text like ?", "%"+text+"%")
 	}
 }
-func AccordingToIsPub(isPub int) func(db *gorm.DB) *gorm.DB {
+func AccordingToIsPub(isPub string) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
-
+		if isPub == "" {
+			return db
+		}
 		return db.Where("is_pub = ?", isPub)
 	}
 }
-func AccordingToIsDel(isDel int) func(db *gorm.DB) *gorm.DB {
+func AccordingToIsDel(isDel string) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
-
+		if isDel == "" {
+			return db
+		}
 		return db.Where("is_del = ?", isDel)
 	}
 }
-func AccordingToBugType(bugType int) func(db *gorm.DB) *gorm.DB {
+func AccordingToBugType(bugType string) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
-
+		if bugType == "" {
+			return db
+		}
 		return db.Where("bug_type = ?", bugType)
 	}
 }

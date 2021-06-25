@@ -29,9 +29,9 @@ type Search struct {
 	Picker   []string `json:"picker"`
 	Valve    bool     `json:"valve"`
 	Text     string   `json:"text"`
-	IsPub    int      `json:"is_pub"`
-	IsDel    int      `json:"is_del"`
-	BugType  int      `json:"bug_type"`
+	IsPub    string   `json:"is_pub"`
+	IsDel    string   `json:"is_del"`
+	BugType  string   `json:"bug_type"`
 	Explain  string   `json:"explain"`
 	WorkId   string   `json:"work_id"`
 	Type     int      `json:"type"`
