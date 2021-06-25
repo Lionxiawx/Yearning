@@ -46,6 +46,10 @@ func SQLReferToOrder(c yee.Context) (err error) {
 	u.CurrentStep = 1
 	u.Relevant = lib.JsonStringify([]string{u.Assigned})
 
+	if u.BugType == "" {
+		u.BugType = "0"
+	}
+
 	model.DB().Create(u)
 	model.DB().Create(&model.CoreWorkflowDetail{
 		WorkId:   w,
